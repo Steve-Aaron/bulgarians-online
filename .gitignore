@@ -1,0 +1,21 @@
+# Build output
+dist/
+dist*/
+
+# Vite internals
+vite.config.js.timestamp-*.mjs
+*.local
+
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
