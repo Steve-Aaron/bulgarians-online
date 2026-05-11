@@ -32,7 +32,7 @@ function AppContent() {
       <main>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/survey" element={<SurveyPage />} />
+          <Route path="/surveys" element={<SurveyPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/contact" element={<ContactPage />} />
         </Routes>

@@ -20,7 +20,7 @@ export default function Navbar() {
 
   const links = [
     { to: '/', label: t.home },
-    { to: '/survey', label: t.survey },
+    { to: '/surveys', label: t.survey },
     { to: '/privacy', label: t.privacy },
     { to: '/contact', label: t.contact },
   ]
@@ -58,7 +58,7 @@ export default function Navbar() {
             <span style={navStyles.langLabel}>{language === 'bg' ? 'BG' : 'EN'}</span>
           </button>
 
-          <Link to="/survey" className="btn btn-primary" style={navStyles.ctaBtn}>
+          <Link to="/surveys" className="btn btn-primary" style={navStyles.ctaBtn}>
             {t.takeSurvey}
           </Link>
 
@@ -87,7 +87,7 @@ export default function Navbar() {
           <button onClick={toggleLanguage} style={navStyles.mobileLang}>
             {language === 'bg' ? '🇬🇧 Switch to English' : '🇧🇬 Смени на Български'}
           </button>
-          <Link to="/survey" className="btn btn-primary" style={{ marginTop: 8 }}>
+          <Link to="/surveys" className="btn btn-primary" style={{ marginTop: 8 }}>
             {t.takeSurvey}
           </Link>
         </div>

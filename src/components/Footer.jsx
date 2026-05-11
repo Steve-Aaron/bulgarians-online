@@ -98,7 +98,7 @@ export default function Footer({ socialLinks = SOCIALS }) {
                 ? 'Вземете участие в нашата анкета!'
                 : 'Take part in our survey!'}
             </p>
-            <Link to="/survey" className="btn btn-primary" style={{ fontSize: '0.85rem', padding: '10px 24px' }}>
+            <Link to="/surveys" className="btn btn-primary" style={{ fontSize: '0.85rem', padding: '10px 24px' }}>
               {tNav.takeSurvey}
             </Link>
           </div>

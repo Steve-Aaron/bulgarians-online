@@ -5,45 +5,66 @@ import translations from '../utils/translations.js'
 // ─── Webhook config ───────────────────────────────────────────────────────────
 const WEBHOOK_URL = import.meta.env.VITE_WEBHOOK_URL || 'https://hooks.zapier.com/hooks/catch/YOUR_WEBHOOK_ID/'
 
-// ─── Pill tags — Q1 multi-choice ─────────────────────────────────────────────
+// ─── Pill tags — Q1 multi-choice (max 3) ─────────────────────────────────────
+const PILL_MAX = 3
+
 function PillTags({ options, values, onChange }) {
+  const atLimit = values.length >= PILL_MAX
+
   const toggle = (opt) => {
-    const next = values.includes(opt)
-      ? values.filter(v => v !== opt)
-      : [...values, opt]
-    onChange(next)
+    if (values.includes(opt)) {
+      onChange(values.filter(v => v !== opt))
+    } else if (!atLimit) {
+      onChange([...values, opt])
+    }
+    // silently block selection beyond the limit
   }
+
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginTop: 20 }}>
-      {options.map((opt, i) => {
-        const sel = values.includes(opt)
-        return (
-          <button
-            key={i}
-            type="button"
-            onClick={() => toggle(opt)}
-            style={{
-              padding: '9px 18px',
-              borderRadius: 999,
-              border: sel ? '2.5px solid #C0182A' : '2px solid rgba(0,0,0,0.1)',
-              background: sel
-                ? 'linear-gradient(135deg, #FFF2F2 0%, #FFFFFF 100%)'
-                : '#FFFFFF',
-              color: sel ? '#C0182A' : '#555',
-              fontFamily: 'Montserrat, sans-serif',
-              fontWeight: sel ? 700 : 500,
-              fontSize: '0.88rem',
-              cursor: 'pointer',
-              transition: 'all 0.18s',
-              boxShadow: sel
-                ? '0 3px 12px rgba(192,24,42,0.2)'
-                : '0 2px 6px rgba(0,0,0,0.05)',
-            }}
-          >
-            {sel ? '✓ ' : ''}{opt}
-          </button>
-        )
-      })}
+    <div>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginTop: 20 }}>
+        {options.map((opt, i) => {
+          const sel = values.includes(opt)
+          const disabled = !sel && atLimit
+          return (
+            <button
+              key={i}
+              type="button"
+              onClick={() => toggle(opt)}
+              style={{
+                padding: '9px 18px',
+                borderRadius: 999,
+                border: sel ? '2.5px solid #C0182A' : '2px solid rgba(0,0,0,0.1)',
+                background: sel
+                  ? 'linear-gradient(135deg, #FFF2F2 0%, #FFFFFF 100%)'
+                  : disabled ? 'rgba(0,0,0,0.03)' : '#FFFFFF',
+                color: sel ? '#C0182A' : disabled ? '#bbb' : '#555',
+                fontFamily: 'Montserrat, sans-serif',
+                fontWeight: sel ? 700 : 500,
+                fontSize: '0.88rem',
+                cursor: disabled ? 'not-allowed' : 'pointer',
+                transition: 'all 0.18s',
+                boxShadow: sel
+                  ? '0 3px 12px rgba(192,24,42,0.2)'
+                  : '0 2px 6px rgba(0,0,0,0.05)',
+                opacity: disabled ? 0.55 : 1,
+              }}
+            >
+              {sel ? '✓ ' : ''}{opt}
+            </button>
+          )
+        })}
+      </div>
+      {/* Selection counter */}
+      <p style={{
+        fontFamily: 'Montserrat, sans-serif',
+        fontSize: '0.78rem',
+        fontWeight: 600,
+        color: atLimit ? '#C0182A' : '#aaa',
+        marginTop: 14,
+      }}>
+        {values.length} / {PILL_MAX} selected
+      </p>
     </div>
   )
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useLanguage } from '../contexts/LanguageContext.jsx'
 import translations from '../utils/translations.js'
-import radevHero from '/radev_hero.jpg'
+const radevHero = '/assets/banner.jpg'
 
 // ─── NOTE ─────────────────────────────────────────────────────────────────────
 // Save the uploaded claymation image to:
@@ -10,7 +10,7 @@ import radevHero from '/radev_hero.jpg'
 // It will then appear automatically in the About and CTA sections.
 // ─────────────────────────────────────────────────────────────────────────────
 
-const CLAYMATION_IMG = '/claymation_crowd.svg'
+const CLAYMATION_IMG = '/assets/claymation_crowd.svg'
 
 const SOCIALS = [
   { name: 'Facebook',  url: 'https://www.facebook.com/profile.php?id=61566076958479#', gradient: 'linear-gradient(135deg,#E7F0FD 0%,#C5D9F9 100%)', emoji: '📘', color: '#1877F2' },
@@ -54,7 +54,7 @@ function HeroSection({ t }) {
         <h1 style={hero.h1} className="fade-up fade-up-2">{t.hero.heading}</h1>
         <p style={hero.sub} className="fade-up fade-up-3">{t.hero.subheading}</p>
         <div className="fade-up fade-up-4" style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-          <Link to="/survey" className="btn btn-primary" style={hero.cta}>{t.hero.cta} →</Link>
+          <Link to="/surveys" className="btn btn-primary" style={hero.cta}>{t.hero.cta} →</Link>
         </div>
       </div>
 
@@ -196,7 +196,7 @@ function SurveyCtaSection({ t, language }) {
           {t.surveyCta.heading}
         </h2>
         <p style={{ ...midCta.body, color: 'rgba(255,255,255,0.88)' }}>{t.surveyCta.body}</p>
-        <Link to="/survey" className="btn btn-secondary" style={{ fontSize: '1.05rem', padding: '16px 40px' }}>
+        <Link to="/surveys" className="btn btn-secondary" style={{ fontSize: '1.05rem', padding: '16px 40px' }}>
           {t.surveyCta.cta} →
         </Link>
 
